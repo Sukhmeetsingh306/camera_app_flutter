@@ -1,3 +1,4 @@
+import 'package:camera_flutter/screen/add_place_screen.dart';
 import 'package:camera_flutter/widgets/place_list_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,13 @@ class PlaceListScreen extends StatelessWidget {
         title: const Text('Your Place'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const AddPlaceScreen(),
+                ),
+              );
+            },
             icon: const Icon(
               Icons.add,
             ),
