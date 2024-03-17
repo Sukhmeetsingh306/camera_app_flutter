@@ -1,4 +1,5 @@
 import 'package:camera_flutter/models/place_model.dart';
+import 'package:camera_flutter/screen/place_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class PlaceListWidget extends StatelessWidget {
@@ -32,6 +33,15 @@ class PlaceListWidget extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onBackground,
                 ),
           ),
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => PlaceDetailScreen(
+                  placeModal: placeModal[index],
+                ),
+              ),
+            );
+          },
         );
       }),
     );
