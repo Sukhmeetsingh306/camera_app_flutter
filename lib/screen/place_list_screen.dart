@@ -1,12 +1,18 @@
+import 'package:camera_flutter/providers/user_place_provider.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:camera_flutter/screen/add_place_screen.dart';
 import 'package:camera_flutter/widgets/place_list_widget.dart';
-import 'package:flutter/material.dart';
 
-class PlaceListScreen extends StatelessWidget {
+class PlaceListScreen extends ConsumerWidget {
   const PlaceListScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    final userPlaceProviderInScreen = ref.watch(userPlaceProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your Place'),
@@ -25,8 +31,8 @@ class PlaceListScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: const PlaceListWidget(
-        placeModal: [],
+      body:  PlaceListWidget(
+        placeModal: userPlaceProviderInScreen,
       ),
     );
   }
