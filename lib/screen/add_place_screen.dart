@@ -1,3 +1,4 @@
+import 'package:camera_flutter/widgets/image_input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,11 +14,11 @@ class AddPlaceScreen extends ConsumerStatefulWidget {
 class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
   final _titleController = TextEditingController();
 
-  void savePlace(){
+  void savePlace() {
     final enteredTextTitle = _titleController.text;
 
-    if(enteredTextTitle.isEmpty){
-      return ;
+    if (enteredTextTitle.isEmpty) {
+      return;
     }
 
     ref.read(userPlaceProvider.notifier).addPlaceUserProvider(enteredTextTitle);
@@ -50,6 +51,10 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
                 color: Theme.of(context).colorScheme.onBackground,
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            const ImageInputWidget(),
             const SizedBox(
               height: 16,
             ),
