@@ -10,7 +10,6 @@ class PlaceListScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final userPlaceProviderInScreen = ref.watch(userPlaceProvider);
 
     return Scaffold(
@@ -31,8 +30,11 @@ class PlaceListScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body:  PlaceListWidget(
-        placeModal: userPlaceProviderInScreen,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: PlaceListWidget(
+          placeModal: userPlaceProviderInScreen,
+        ),
       ),
     );
   }

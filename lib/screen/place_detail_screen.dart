@@ -17,13 +17,15 @@ class PlaceDetailScreen extends StatelessWidget {
           placeModal.title,
         ),
       ),
-      body: Center(
-        child: Text(
-          placeModal.title,
-          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,
-              ),
-        ),
+      body: Stack(
+        children: [
+          Image.file(
+            placeModal.image,
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+        ],
       ),
     );
   }

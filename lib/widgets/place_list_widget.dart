@@ -27,6 +27,12 @@ class PlaceListWidget extends StatelessWidget {
       itemCount: placeModal.length,
       itemBuilder: ((context, index) {
         return ListTile(
+          leading: CircleAvatar(
+            radius: 26,
+            backgroundImage: FileImage(
+              placeModal[index].image,
+            ),
+          ),
           title: Text(
             placeModal[index].title,
             style: Theme.of(context).textTheme.titleMedium!.copyWith(
