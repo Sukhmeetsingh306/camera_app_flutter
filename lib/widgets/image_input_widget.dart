@@ -8,6 +8,8 @@ class ImageInputWidget extends StatefulWidget {
 }
 
 class _ImageInputWidgetState extends State<ImageInputWidget> {
+
+  // this will the code  in which the camera will open and take the input
   void _takePicture() {}
 
   @override
