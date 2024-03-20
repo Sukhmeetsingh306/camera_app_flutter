@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:camera_flutter/models/place_model.dart';
 import 'package:camera_flutter/widgets/image_input_widget.dart';
 import 'package:camera_flutter/widgets/location_input_widget.dart';
 import 'package:flutter/material.dart';
@@ -17,17 +18,22 @@ class AddPlaceScreen extends ConsumerStatefulWidget {
 class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
   final _titleController = TextEditingController();
   File? _selectedImage;
+  PlaceLocationModal? _selectedLocation;
 
   void savePlace() {
     final enteredTextTitle = _titleController.text;
 
-    if (enteredTextTitle.isEmpty || _selectedImage == null) {
+    if (enteredTextTitle.isEmpty ||
+        _selectedImage == null ||
+        _selectedLocation == null) {
       return;
     }
 
-    ref
-        .read(userPlaceProvider.notifier)
-        .addPlaceUserProvider(enteredTextTitle, _selectedImage!);
+    ref.read(userPlaceProvider.notifier).addPlaceUserProvider(
+          enteredTextTitle,
+          _selectedImage!,
+          _selectedLocation!,
+        );
 
     Navigator.of(context).pop();
   }
@@ -68,7 +74,11 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
             const SizedBox(
               height: 10,
             ),
-            const LocationInputWidget(),
+            LocationInputWidget(
+              onSelectedLocation: (location) {
+                _selectedLocation = location;
+              },
+            ),
             const SizedBox(
               height: 16,
             ),

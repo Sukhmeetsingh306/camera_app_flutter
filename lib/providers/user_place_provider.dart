@@ -7,8 +7,13 @@ import '../models/place_model.dart';
 class UserPlaceProviderNotifier extends StateNotifier<List<PlaceModel>> {
   UserPlaceProviderNotifier() : super(const []);
 
-  void addPlaceUserProvider(String title,File image) {
-    final newPlace = PlaceModel(title: title,image: image);
+  void addPlaceUserProvider(
+      String title, File image, PlaceLocationModal location) {
+    final newPlace = PlaceModel(
+      title: title,
+      image: image,
+      location: location,
+    );
     state = [
       ...state,
       newPlace
