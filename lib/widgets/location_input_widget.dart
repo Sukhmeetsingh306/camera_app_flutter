@@ -17,6 +17,17 @@ class _LocationInputWidgetState extends State<LocationInputWidget> {
   PlaceLocationModal? _pickedLocation;
   var _isGettingLocation = false;
 
+  String get locationImage {
+    if (_pickedLocation == null) {
+      return '';
+    }
+
+    final lat = _pickedLocation!.latitude;
+    final lng = _pickedLocation!.longitude;
+
+    return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$lng=&zoom=16&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:A%7C$lat,$lng&key=AIzaSyBfszrvr6tTGmMfarhe-QHTtzctpeT2mFA';
+  }
+
   void _getCurrentLocation() async {
     Location location = Location();
 
@@ -77,6 +88,15 @@ class _LocationInputWidgetState extends State<LocationInputWidget> {
   Widget build(BuildContext context) {
     Widget previewContent =
         textBodyLargeOnBackgroundColor(context, 'No Location Added');
+
+    if (_pickedLocation != null) {
+      previewContent = Image.network(
+        locationImage,
+        fit: BoxFit.cover,
+        width: double.infinity,
+        height: double.infinity,
+      );
+    }
 
     if (_isGettingLocation) {
       previewContent = const CircularProgressIndicator();
