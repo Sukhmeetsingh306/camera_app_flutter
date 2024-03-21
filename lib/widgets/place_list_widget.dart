@@ -1,5 +1,6 @@
 import 'package:camera_flutter/models/place_model.dart';
 import 'package:camera_flutter/screen/place_detail_screen.dart';
+import 'package:camera_flutter/theme/color_text_theme.dart';
 import 'package:flutter/material.dart';
 
 class PlaceListWidget extends StatelessWidget {
@@ -14,11 +15,9 @@ class PlaceListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (placeModal.isEmpty) {
       return Center(
-        child: Text(
+        child: textBodyLargeOnBackgroundColor(
+          context,
           'No Places Added Yet',
-          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,
-              ),
         ),
       );
     }
@@ -33,11 +32,13 @@ class PlaceListWidget extends StatelessWidget {
               placeModal[index].image,
             ),
           ),
-          title: Text(
+          title: textTitleMediumOnBackgroundColor(
+            context,
             placeModal[index].title,
-            style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground,
-                ),
+          ),
+          subtitle: textBodySmallOnBackgroundColor(
+            context,
+            placeModal[index].location.address,
           ),
           onTap: () {
             Navigator.of(context).push(

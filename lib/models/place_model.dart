@@ -20,7 +20,7 @@ class PlaceModel {
 class PlaceLocationModal {
   final double latitude;
   final double longitude;
-  final double address;
+  final String address;
 
   PlaceLocationModal({
     required this.latitude,
