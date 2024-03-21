@@ -2,7 +2,6 @@ import 'package:camera_flutter/models/place_model.dart';
 import 'package:camera_flutter/screen/map_screen.dart';
 import 'package:camera_flutter/theme/color_text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class PlaceDetailScreen extends StatelessWidget {
   const PlaceDetailScreen({

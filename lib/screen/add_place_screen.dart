@@ -38,6 +38,7 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
     Navigator.of(context).pop();
   }
 
+  
   @override
   void dispose() {
     _titleController.dispose();
