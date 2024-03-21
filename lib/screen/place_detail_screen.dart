@@ -1,6 +1,8 @@
 import 'package:camera_flutter/models/place_model.dart';
+import 'package:camera_flutter/screen/map_screen.dart';
 import 'package:camera_flutter/theme/color_text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class PlaceDetailScreen extends StatelessWidget {
   const PlaceDetailScreen({
@@ -39,9 +41,21 @@ class PlaceDetailScreen extends StatelessWidget {
             right: 0,
             child: Column(
               children: [
-                CircleAvatar(
-                  radius: 70,
-                  backgroundImage: NetworkImage(locationImage),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => MapScreen(
+                          placeLocationModal: placeModal.location,
+                          isSelected: false,
+                        ),
+                      ),
+                    );
+                  },
+                  child: CircleAvatar(
+                    radius: 70,
+                    backgroundImage: NetworkImage(locationImage),
+                  ),
                 ),
                 Container(
                   alignment: Alignment.center,
