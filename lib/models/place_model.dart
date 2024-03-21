@@ -22,7 +22,7 @@ class PlaceLocationModal {
   final double longitude;
   final String address;
 
-  PlaceLocationModal({
+  const PlaceLocationModal({
     required this.latitude,
     required this.longitude,
     required this.address,
