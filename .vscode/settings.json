@@ -3,6 +3,7 @@
           "fixnum",
           "riverpod",
           "sprintf",
+          "sqflite",
           "syspaths"
      ]
 }

@@ -14,7 +14,9 @@ class PlaceModel {
     required this.location,
     required this.image,
     required this.title,
-  }) : id = uuid.v4();
+    String? id,
+  }) : id = id ?? uuid.v4();
+  // this id system wil replace the null id
 }
 
 class PlaceLocationModal {

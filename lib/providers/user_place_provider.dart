@@ -8,8 +8,45 @@ import 'package:sqflite/sqlite_api.dart';
 
 import '../models/place_model.dart';
 
+Future<Database> _getDatabase() async {
+// with this the database is created
+  final dbPath = await sql.getDatabasesPath();
+  final db = await sql.openDatabase(
+    path.join(dbPath, 'places.db'),
+    onCreate: (db, version) {
+      return db.execute(
+        'CREATE TABLE user_places(id TEXT PRIMARY KEY, title TEXT,  image TEXT, lat REAL, lng REAL, address TEXT)',
+      );
+    },
+    version:
+        1, // increase the number every time when the query is changed as the new database get created
+  );
+  return db;
+}
+
 class UserPlaceProviderNotifier extends StateNotifier<List<PlaceModel>> {
   UserPlaceProviderNotifier() : super(const []);
+
+  void loadedPlaces() async {
+    final db = await _getDatabase();
+    final data = await db.query('user_places');
+    final places = data.map(
+      (row) {
+        return PlaceModel(
+          location: PlaceLocationModal(
+            latitude: row['lat'] as double,
+            longitude: row['lng'] as double,
+            address: row['address'] as String,
+          ),
+          image: File(row['image'] as String),
+          title: row['title'] as String,
+          id: row['id'] as String,
+        );
+      },
+    ).toList();
+
+    state = places;
+  }
 
   void addPlaceUserProvider(
       String title, File image, PlaceLocationModal location) async {
@@ -24,18 +61,7 @@ class UserPlaceProviderNotifier extends StateNotifier<List<PlaceModel>> {
       location: location,
     );
 
-// with this the database is created
-    final dbPath = await sql.getDatabasesPath();
-    final db = await sql.openDatabase(
-      path.join(dbPath, 'places.db'),
-      onCreate: (db, version) {
-        return db.execute(
-          'CREATE TABLE user_places(id TEXT PRIMARY KEY, title TEXT,  image TEXT, lat REAL, lng REAL, address TEXT)',
-        );
-      },
-      version:
-          1, // increase the number every time when the query is changed as the new database get created
-    );
+    final db = await _getDatabase();
 
 // with this we will insert the value in the database and create new elements
     db.insert('user_places', {
